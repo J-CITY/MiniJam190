@@ -80,6 +80,7 @@ public class CoreGameController : MonoBehaviour
         {
             return;
         }
+        Debug.Log(levelTimer);
         if (levelTimer > 0.0f)
         {
             levelTimer -= Time.deltaTime;

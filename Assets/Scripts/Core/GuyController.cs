@@ -74,7 +74,6 @@ public class GuyController : MonoBehaviour
         else
         {
             isNPC = false;
-            GuysCount--;
         }
 
         RemoveLineFromActive();
@@ -289,6 +288,7 @@ public class GuyController : MonoBehaviour
             hasCat = true;
             Debug.Log("Player collide");
 
+            GuysCount--;
             //GameObject.Find("CoreGame").SendMessage("Pause");
         }
 

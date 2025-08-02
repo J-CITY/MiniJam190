@@ -107,7 +107,6 @@ public class MovementController : MonoBehaviour
             else
             {
                 //give damage
-
             }
         }
     }
