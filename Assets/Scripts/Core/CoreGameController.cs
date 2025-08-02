@@ -27,6 +27,7 @@ public class CoreGameController : MonoBehaviour
 
     [SerializeField] private int maxGuyOnField = 10;
     [SerializeField] private float levelTimer = 60.0f;
+    [SerializeField] private List<GameObject> miniGames = new List<GameObject>();
 
     private GameObject player;
     private List<GameObject> guys = new List<GameObject>();
@@ -122,5 +123,10 @@ public class CoreGameController : MonoBehaviour
         state = State.InGame;
         SpawnPlayer();
         SpawnGuys();
+    }
+
+    private void CreateMinigame()
+    {
+        Instantiate(miniGames[0], transform);
     }
 }

@@ -103,6 +103,7 @@ public class MovementController : MonoBehaviour
             {
                 // start minigame and clear field
                 GameObject.Find("CoreGame").SendMessage("Pause");
+                GameObject.Find("CoreGame").SendMessage("CreateMinigame");
             }
             else
             {

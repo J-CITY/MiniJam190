@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1618756080569096994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4582077757836035904}
+  - component: {fileID: 40232432652549655}
+  m_Layer: 0
+  m_Name: Memory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4582077757836035904
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618756080569096994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1.24401, y: 0.78385}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &40232432652549655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618756080569096994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59592a101c88c4f108b5f0131ef6b804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rows: 4
+  columns: 4
+  offsetX: 1
+  offsetY: 1
+  unflipDelay: 0.2
+  cardPrefabs:
+  - {fileID: 3281399545961529193, guid: e8ad3e655b2d948b6a469921ba109d20, type: 3}
+  - {fileID: 6735424484893595330, guid: c261bcecea5ce48188a4b5e3f3a81d8d, type: 3}
+  - {fileID: 7550991723158978853, guid: 118bbe12d0e024af5a752d972b20ec19, type: 3}
+  - {fileID: 2481769905636575879, guid: a7aa3490d2a2e4b52a5002a2dacfbe4f, type: 3}
+  - {fileID: 3758581013899865541, guid: 3d7acb7a372ed4be39f9fb4415fdf238, type: 3}
+  - {fileID: 5448462374409190486, guid: 8a5f761624486450cada97354e8c6be2, type: 3}
+  - {fileID: 7317684170338965356, guid: 25a62c2f5de124aa7ab467d95e40fa63, type: 3}
+  - {fileID: 877217776889192501, guid: a1dacb364ecf64eabac9014631fe6adc, type: 3}
+  turnCount: 40

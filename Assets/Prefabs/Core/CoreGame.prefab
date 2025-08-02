@@ -637,3 +637,5 @@ MonoBehaviour:
   guyPrefab: {fileID: 1710467956252735434, guid: fa0ed3e74332d3443aa8d7e4c9260792, type: 3}
   maxGuyOnField: 5
   levelTimer: 60
+  miniGames:
+  - {fileID: 1618756080569096994, guid: 30b16dc0e9a0545c18b5114b57a31d8f, type: 3}
