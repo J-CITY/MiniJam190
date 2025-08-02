@@ -22,7 +22,7 @@ public class MovementController : MonoBehaviour
     {
         if (!isReady())
         {
-            return;
+            //return;
         }
         
         Vector2 inputPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -88,6 +88,8 @@ public class MovementController : MonoBehaviour
         {
             Debug.Log("Player collided with guy");
             hasCollide = true;
+
+            GameObject.Find("CoreGame").SendMessage("Pause");
         }
     }
 }

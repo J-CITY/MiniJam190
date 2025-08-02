@@ -42,7 +42,7 @@ public class CoreGameController : MonoBehaviour
         guys.Clear();
         for (int i = 0; i < maxGuyOnField; ++i)
         {
-            GameObject obj = Instantiate(guyPrefab, new Vector3(), Quaternion.identity);
+            GameObject obj = Instantiate(guyPrefab, new Vector3(100, 100), Quaternion.identity);
             Component component = obj.GetComponent("GuyController");
             if (component != null)
             {
