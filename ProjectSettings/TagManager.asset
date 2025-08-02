@@ -48,6 +48,9 @@ TagManager:
   - name: Guy
     uniqueID: 1561825745
     locked: 0
+  - name: Card
+    uniqueID: 2891599755
+    locked: 0
   - name: Debug
     uniqueID: 296513677
     locked: 0

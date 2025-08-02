@@ -187,7 +187,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 296513677
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.07035947, g: 1, b: 0, a: 1}
@@ -635,7 +635,7 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 7376098810039937023}
   playerPrefab: {fileID: 3662581048137619447, guid: 5dc6044b907988d46960b963afaee3ae, type: 3}
   guyPrefab: {fileID: 1710467956252735434, guid: fa0ed3e74332d3443aa8d7e4c9260792, type: 3}
-  maxGuyOnField: 5
+  maxGuyOnField: 3
   levelTimer: 60
   miniGames:
   - {fileID: 1618756080569096994, guid: 30b16dc0e9a0545c18b5114b57a31d8f, type: 3}
