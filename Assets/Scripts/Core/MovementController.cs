@@ -11,6 +11,8 @@ public class MovementController : MonoBehaviour
 
     private bool isDragging;
 
+    private bool hasCollide = false;
+
     void Start()
     {
         
@@ -73,5 +75,19 @@ public class MovementController : MonoBehaviour
         Vector2 dir = (Vector2)transform.position - pos;
 
         body.linearVelocity = Vector2.ClampMagnitude(dir * power, maxPower);
+
+        if (!hasCollide)
+        {
+            // we jumped without collide with guys
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Guy")
+        {
+            Debug.Log("Player collided with guy");
+            hasCollide = true;
+        }
     }
 }
