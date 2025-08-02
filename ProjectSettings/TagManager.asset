@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Guy
+  - YellowZone
+  - RedZone
+  - BlackZone
   layers:
   - Default
   - TransparentFX
@@ -53,6 +56,8 @@ TagManager:
     locked: 0
   - name: Debug
     uniqueID: 296513677
+  - name: Labyrint
+    uniqueID: 2524129259
     locked: 0
   m_RenderingLayers:
   - Default
