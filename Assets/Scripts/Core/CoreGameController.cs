@@ -1,8 +1,16 @@
 using System;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+
+
+enum Loot : int
+{
+    Loot1 = 0,
+    Loot2,
+}
 
 public class CoreGameController : MonoBehaviour
 {
@@ -25,8 +33,12 @@ public class CoreGameController : MonoBehaviour
 
     State state = State.InGame;
 
+
+    List<Loot> loots = new List<Loot>();
+
     void Start()
     {
+        loots.Clear();
         state = State.InGame;
         SpawnPlayer();
         SpawnGuys();
@@ -64,6 +76,10 @@ public class CoreGameController : MonoBehaviour
 
     void Update()
     {
+        if (state != State.InGame)
+        {
+            return;
+        }
         if (levelTimer > 0.0f)
         {
             levelTimer -= Time.deltaTime;
@@ -88,8 +104,12 @@ public class CoreGameController : MonoBehaviour
 
     private void Pause()
     {
+        if (state != State.InGame)
+        {
+            return;
+        }
+        state = State.Pause;
         Clear();
-
         //player.BroadcastMessage("Pause");
         //foreach (GameObject guy in guys)
         //{
@@ -98,6 +118,7 @@ public class CoreGameController : MonoBehaviour
     }
     private void Unpause()
     {
+        state = State.InGame;
         SpawnPlayer();
         SpawnGuys();
     }

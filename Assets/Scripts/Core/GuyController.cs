@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class GuyController : MonoBehaviour
 {
@@ -20,10 +20,15 @@ public class GuyController : MonoBehaviour
     
     // Статический список всех активных траекторий
     private static List<Line> activeLines = new List<Line>();
+
+    public static int GuysCount = 10;
     
     public float speed = 2.0f;
     public Transform leftDown;
     public Transform rightUp;
+
+    public int trashholdForDamage = 7;
+
     [SerializeField] private float lineThickness = 1.0f; // Толщина линии N
     [SerializeField] private int maxSpawnAttempts = 50; // Максимум попыток создания траектории
     
@@ -32,6 +37,11 @@ public class GuyController : MonoBehaviour
     private bool isMoveFinished = false;
     private bool hasCat = false;
     private Line currentLine;
+
+
+    bool hasDamageForPlayer = false;
+    Loot loot = Loot.Loot1;
+    bool isNPC = false;
 
     void Start()
     {
@@ -54,6 +64,19 @@ public class GuyController : MonoBehaviour
 
     void Spawn()
     {
+        hasDamageForPlayer = Random.Range(0, 10) > trashholdForDamage;
+        loot = (Loot)Random.Range(0, System.Enum.GetNames(typeof(Loot)).Length);
+
+        if (GuysCount <= 0)
+        {
+            isNPC = true;
+        }
+        else
+        {
+            isNPC = false;
+            GuysCount--;
+        }
+
         RemoveLineFromActive();
 
         hasCat = false;
@@ -276,4 +299,10 @@ public class GuyController : MonoBehaviour
             //GameObject.Find("CoreGame").SendMessage("Pause");
         }
     }
+    
+    public bool IsNPC()
+    {
+        return isNPC;
+    }
+
 }

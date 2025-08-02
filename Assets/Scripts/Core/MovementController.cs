@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
@@ -15,7 +17,7 @@ public class MovementController : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -89,7 +91,24 @@ public class MovementController : MonoBehaviour
             Debug.Log("Player collided with guy");
             hasCollide = true;
 
-            GameObject.Find("CoreGame").SendMessage("Pause");
+            bool isNPC = false;
+
+            var component = collision.gameObject.GetComponent<GuyController>();
+            if (component != null)
+            {
+                isNPC = component.IsNPC();
+            }
+
+            if (!isNPC)
+            {
+                // start minigame and clear field
+                GameObject.Find("CoreGame").SendMessage("Pause");
+            }
+            else
+            {
+                //give damage
+
+            }
         }
     }
 }
