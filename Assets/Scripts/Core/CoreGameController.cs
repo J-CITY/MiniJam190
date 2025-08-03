@@ -187,6 +187,7 @@ public class CoreGameController : MonoBehaviour
         {
             //goal
             state = State.Win;
+            Clear();
             WinGame();
         }
         else
@@ -197,11 +198,11 @@ public class CoreGameController : MonoBehaviour
 
     void LoseGame()
     {
-
+        Debug.Log("LOSE");
     }
 
     void WinGame()
     {
-
+        Debug.Log("WIN");
     }
 }
