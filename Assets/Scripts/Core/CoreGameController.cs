@@ -29,20 +29,28 @@ public class CoreGameController : MonoBehaviour
     public GameObject guyPrefab;
 
     [SerializeField] private int maxGuyOnField = 10;
+    [SerializeField] private float levelTimerBase= 60.0f;
     [SerializeField] private float levelTimer = 60.0f;
+
+
     [SerializeField] private List<GameObject> miniGames = new List<GameObject>();
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private UnityEngine.UI.Slider stressSlider;
+    [SerializeField] private GameObject loseNode;
+    [SerializeField] private GameObject winNode;
 
     private GameObject player;
     private List<GameObject> guys = new List<GameObject>();
 
     State state = State.InGame;
 
+    public int stressValueBase = 100;
     public int stressValue = 100;
 
+    public int lootRestoreStressBase = 10;
     public int lootRestoreStress = 10;
 
+    public int itemTrashCountBase = 9;
     public int itemTrashCount = 9;
 
 
@@ -51,6 +59,11 @@ public class CoreGameController : MonoBehaviour
     Loot goal = Loot.Loot1;
 
     void Start()
+    {
+        StartGame();
+    }
+
+    void StartGame()
     {
         loots.Clear();
         goal = (Loot)UnityEngine.Random.Range(0, System.Enum.GetNames(typeof(Loot)).Length);
@@ -109,8 +122,6 @@ public class CoreGameController : MonoBehaviour
             state = State.LevelEnd;
 
             stressValue = 0;
-            Clear();
-
             LoseGame();
         }
     }
@@ -167,7 +178,11 @@ public class CoreGameController : MonoBehaviour
         {
             return;
         }
+
+        Debug.Log("AddStress");
+        Debug.Log(v);
         stressValue += v;
+        Debug.Log(stressValue);
         if (stressValue < 0)
         {
             stressValue = 0;
@@ -187,7 +202,6 @@ public class CoreGameController : MonoBehaviour
         {
             //goal
             state = State.Win;
-            Clear();
             WinGame();
         }
         else
@@ -198,11 +212,32 @@ public class CoreGameController : MonoBehaviour
 
     void LoseGame()
     {
+        Clear();
         Debug.Log("LOSE");
+        loseNode.SetActive(true);
+        winNode.SetActive(false);
     }
 
     void WinGame()
     {
+        Clear();
         Debug.Log("WIN");
+        loseNode.SetActive(false);
+        winNode.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+
+        loseNode.SetActive(false);
+        winNode.SetActive(false);
+
+        Debug.Log("RestartGame");
+        levelTimer = levelTimerBase;
+        stressValue = stressValueBase;
+        lootRestoreStress = lootRestoreStressBase;
+        itemTrashCount = itemTrashCountBase;
+        state = State.InGame;
+        StartGame();
     }
 }
