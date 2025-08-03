@@ -79,6 +79,14 @@ public class MemoryMiniGame : MonoBehaviour
         if (turnCount == 0 || _matchedCards.Count == columns * rows)
         {
             GameObject.Find("CoreGame").SendMessage("Unpause");
+            if (turnCount == 0)
+            {
+                GameObject.Find("CoreGame").SendMessage("AddStress", -15);
+            }
+            else
+            {
+                GameObject.Find("CoreGame").SendMessage("TakeRewardForMinigame");
+            }
             DespawnUI();
             Destroy(gameObject);
         }
