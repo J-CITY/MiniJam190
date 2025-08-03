@@ -22,7 +22,11 @@ public class GuyController : MonoBehaviour
     private static List<Line> activeLines = new List<Line>();
 
     public static int GuysCount = 10;
-    
+
+
+    public float speedMin = 1.0f;
+    public float speedMax = 4.0f;
+
     public float speed = 2.0f;
     public Transform leftDown;
     public Transform rightUp;
@@ -64,9 +68,9 @@ public class GuyController : MonoBehaviour
 
     void InitVisual()
     {
-        int bodyId = Random.Range(0, 3);
-        int headId = Random.Range(0, 3);
-        int hairId = Random.Range(0, 3);
+        int bodyId = Random.Range(0, 4);
+        int headId = Random.Range(0, 4);
+        int hairId = Random.Range(0, 4);
 
         var visual = transform.Find("Visual");
         for (int i = 0; i < 4; ++i)
@@ -86,8 +90,8 @@ public class GuyController : MonoBehaviour
     void Spawn()
     {
         InitVisual();
-        hasDamageForPlayer = Random.Range(0, 10) > trashholdForDamage;
-        loot = (Loot)Random.Range(0, System.Enum.GetNames(typeof(Loot)).Length);
+        hasDamageForPlayer = Random.Range(0, 11) > trashholdForDamage;
+        loot = (Loot)Random.Range(0, System.Enum.GetNames(typeof(Loot)).Length + 1);
 
         if (GuysCount <= 0)
         {
@@ -102,7 +106,8 @@ public class GuyController : MonoBehaviour
 
         hasCat = false;
         isMoveFinished = false;
-        
+
+        speed = Random.Range(speedMin, speedMax);
         // Удаляем предыдущую линию если была
         RemoveLineFromActive();
         
@@ -143,7 +148,7 @@ public class GuyController : MonoBehaviour
     
     void GenerateRandomLine()
     {
-        int start = Random.Range(0, 4);
+        int start = Random.Range(0, 2);
         int end = 0;
         
         switch (start)
