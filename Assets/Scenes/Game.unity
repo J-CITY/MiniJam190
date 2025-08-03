@@ -571,13 +571,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
-      propertyPath: timerText
-      value: 
-      objectReference: {fileID: 1627657480}
-    - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
       propertyPath: stressText
       value: 
       objectReference: {fileID: 1606028807}
+    - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
+      propertyPath: miniGames.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
+      propertyPath: 'miniGames.Array.data[2]'
+      value: 
+      objectReference: {fileID: 449311755147297867, guid: 01d122d7098a81d4fb7ef953dfc46419, type: 3}
     - target: {fileID: 2401475741935692316, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
