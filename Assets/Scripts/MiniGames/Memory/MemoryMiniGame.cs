@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
 
-public class PairMiniGameController : MonoBehaviour
+public class MemoryMiniGame : MonoBehaviour
 {
     [SerializeField]
     private int rows;
@@ -39,7 +39,7 @@ public class PairMiniGameController : MonoBehaviour
         
         Shuffle(cards);
         
-        var spriteSize = cardPrefabs[0].GetComponent<SpriteRenderer>().bounds.size;
+        var spriteSize = cardPrefabs[0].GetComponent<Card>().backSprite.bounds.size;
         
         for (var row = 0; row < rows; ++row)
         {
@@ -61,6 +61,13 @@ public class PairMiniGameController : MonoBehaviour
                 }));
             }
         }
+
+        var size = new Vector2(columns * (spriteSize.x + offsetX), rows * (spriteSize.y + offsetY));
+        
+        Debug.Log(spriteSize);
+        Debug.Log(size);
+        
+        transform.position = new Vector3((size.x - offsetX - spriteSize.x) * -0.5f, (size.y - offsetY - spriteSize.y) * -0.5f, 0);
     }
 
     void Update()
