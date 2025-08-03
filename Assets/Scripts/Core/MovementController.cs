@@ -43,6 +43,10 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         if (timer > 0)
         {
             timer -= Time.deltaTime;
