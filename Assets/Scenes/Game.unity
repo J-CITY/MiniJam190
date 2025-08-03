@@ -2317,7 +2317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
       propertyPath: levelTimer
-      value: 10
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
       propertyPath: stressText
