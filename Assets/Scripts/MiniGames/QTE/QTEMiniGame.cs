@@ -150,8 +150,8 @@ public class QTEMiniGame : MonoBehaviour
         foreach (var button in _buttons)
         {
             // Take into account the button size to avoid overlap and ensure it fits within the container
-            if (Mathf.Abs(x - button.transform.localPosition.x) < buttonSize.x / 2 &&
-                Mathf.Abs(y - button.transform.localPosition.y) < buttonSize.y / 2)
+            if (Mathf.Abs(x - button.transform.localPosition.x) < buttonSize.x &&
+                Mathf.Abs(y - button.transform.localPosition.y) < buttonSize.y)
             {
                 return GenerateButtonPosition(); // Retry if position intersects
             }
@@ -166,6 +166,8 @@ public class QTEMiniGame : MonoBehaviour
         buttonObject.transform.SetParent(buttonContainer, false);
 
         var button = buttonObject.GetComponent<QTEButton>();
+
+        _buttons.Add(button);
 
         button.timer = buttonTime;
 
@@ -184,7 +186,6 @@ public class QTEMiniGame : MonoBehaviour
     private void RemoveButton(QTEButton button)
     {
         _buttons.Remove(button);
-        Destroy(button.gameObject);
     }
 
     private void OnButtonMiss()
