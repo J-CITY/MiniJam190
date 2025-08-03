@@ -107,18 +107,20 @@ public class QTEMiniGame : MonoBehaviour
     private void HandleWinGame()
     {
         OnWin.Invoke();
+        GameObject.Find("CoreGame").SendMessage("TakeRewardForMinigame");
         ExitGame();
     }
 
     private void HandleLooseGame()
     {
         OnLoose.Invoke();
+        GameObject.Find("CoreGame").SendMessage("AddStress", -15);
         ExitGame();
     }
 
     private void ExitGame()
     {
-        GameObject.Find("CoreGame").SendMessage("Unpause");
+        GameObject.Find("CoreGame").SendMessage("Unpause"); 
         Destroy(gameObject);
     }
 
