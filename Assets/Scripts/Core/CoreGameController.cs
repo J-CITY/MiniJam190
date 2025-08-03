@@ -42,6 +42,8 @@ public class CoreGameController : MonoBehaviour
 
     public int lootRestoreStress = 10;
 
+    public int itemTrashCount = 9;
+
 
     List<Loot> loots = new List<Loot>();
 
@@ -156,6 +158,8 @@ public class CoreGameController : MonoBehaviour
     {
         Instantiate(miniGames[UnityEngine.Random.Range(0, miniGames.Count)], Vector3.zero, Quaternion.identity);
     }
+
+    //Call if LOSE in minigame with v = -15
     void AddStress(int v)
     {
         if (state != State.InGame)
@@ -173,10 +177,14 @@ public class CoreGameController : MonoBehaviour
         }
     }
 
-    void TakeRewardForMinigame(Loot l)
+    //Call if WIN in minigame
+    void TakeRewardForMinigame()
     {
-        if (l == goal)
+        var rnd = UnityEngine.Random.Range(0, itemTrashCount + 1);//itemTrashCount + goal
+        itemTrashCount = Math.Max(itemTrashCount-1, 0);
+        if (rnd == 0)
         {
+            //goal
             state = State.Win;
             WinGame();
         }
