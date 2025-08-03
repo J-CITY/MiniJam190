@@ -40,6 +40,9 @@ public class CoreGameController : MonoBehaviour
     [SerializeField] private GameObject winNode;
     [SerializeField] private Clock timer;
 
+
+    [SerializeField] private GameObject lootTextNode;
+
     private GameObject player;
     private List<GameObject> guys = new List<GameObject>();
 
@@ -53,6 +56,8 @@ public class CoreGameController : MonoBehaviour
 
     public int itemTrashCountBase = 9;
     public int itemTrashCount = 9;
+
+    float showTextTimer = 0.0f;
 
 
     List<Loot> loots = new List<Loot>();
@@ -105,6 +110,15 @@ public class CoreGameController : MonoBehaviour
 
     void Update()
     {
+        if (showTextTimer > 0)
+        {
+            showTextTimer -= Time.deltaTime;
+            if (showTextTimer <=0)
+            {
+                showTextTimer = 0;
+                lootTextNode.SetActive(false);
+            }
+        }
         if (state != State.InGame)
         {
             return;
@@ -207,7 +221,14 @@ public class CoreGameController : MonoBehaviour
         else
         {
             stressValue += lootRestoreStress;
+            RunAddLootText();
         }
+    }
+
+    void RunAddLootText()
+    {
+        showTextTimer = 1.5f;
+        lootTextNode.SetActive(true);
     }
 
     void LoseGame()
