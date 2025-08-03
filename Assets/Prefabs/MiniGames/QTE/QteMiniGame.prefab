@@ -64,7 +64,7 @@ MonoBehaviour:
   buttonSpawnCooldown: 0.5
   gameTime: 10
   lives: 3
-  buttonPrefab: {fileID: 7074329451016758731, guid: d63e40e17b43c1e44bb7a3ffd26d8aba, type: 3}
+  buttonPrefab: {fileID: 3681981267275057037, guid: d63e40e17b43c1e44bb7a3ffd26d8aba, type: 3}
   hearts:
   - {fileID: 7222053928023826543}
   - {fileID: 3156808951990828799}
