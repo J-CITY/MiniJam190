@@ -107,15 +107,19 @@ public class QTEMiniGame : MonoBehaviour
     private void HandleWinGame()
     {
         OnWin.Invoke();
-        
-        _state = State.Idle;
+        ExitGame();
     }
 
     private void HandleLooseGame()
     {
         OnLoose.Invoke();
-        
-        _state = State.Idle;
+        ExitGame();
+    }
+
+    private void ExitGame()
+    {
+        GameObject.Find("CoreGame").SendMessage("Unpause");
+        Destroy(gameObject);
     }
 
     private void HandleSpawnState()
