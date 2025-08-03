@@ -62,8 +62,30 @@ public class GuyController : MonoBehaviour
         }
     }
 
+    void InitVisual()
+    {
+        int bodyId = Random.Range(0, 3);
+        int headId = Random.Range(0, 3);
+        int hairId = Random.Range(0, 3);
+
+        var visual = transform.Find("Visual");
+        for (int i = 0; i < 4; ++i)
+        {
+            var body = visual.Find("body" + i.ToString());
+            body.gameObject.SetActive(i == bodyId);
+
+            var head = visual.Find("head" + i.ToString());
+            head.gameObject.SetActive(i == headId);
+
+            var hair = visual.Find("hair" + i.ToString());
+            hair.gameObject.SetActive(i == hairId);
+        }
+
+    }
+
     void Spawn()
     {
+        InitVisual();
         hasDamageForPlayer = Random.Range(0, 10) > trashholdForDamage;
         loot = (Loot)Random.Range(0, System.Enum.GetNames(typeof(Loot)).Length);
 
