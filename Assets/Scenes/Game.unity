@@ -2336,6 +2336,14 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
+      propertyPath: 'miniGames.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7129994456606220030, guid: ab986dc8643c841c2a35205211e9545c, type: 3}
+    - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
+      propertyPath: 'miniGames.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1618756080569096994, guid: 30b16dc0e9a0545c18b5114b57a31d8f, type: 3}
+    - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
       propertyPath: 'miniGames.Array.data[2]'
       value: 
       objectReference: {fileID: 449311755147297867, guid: 01d122d7098a81d4fb7ef953dfc46419, type: 3}
