@@ -64,7 +64,8 @@ public class LevelManager : MonoBehaviour
         if (isDebug)
         {
             ShowButton(winButtonPrefab, RestartLevel, player.transform.position);
-        } else
+        }
+        else
         {
             GameObject.Find("CoreGame").SendMessage("Unpause");
             GameObject.Find("CoreGame").SendMessage("TakeRewardForMinigame");
