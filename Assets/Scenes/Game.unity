@@ -1958,20 +1958,12 @@ PrefabInstance:
       objectReference: {fileID: 869570984}
     - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
       propertyPath: miniGames.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
-      propertyPath: 'miniGames.Array.data[0]'
-      value: 
-      objectReference: {fileID: 449311755147297867, guid: 01d122d7098a81d4fb7ef953dfc46419, type: 3}
-    - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
-      propertyPath: 'miniGames.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1379206037045906916, guid: 8005c71c4d53c804486b500073cfc98a, type: 3}
     - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
       propertyPath: 'miniGames.Array.data[2]'
       value: 
-      objectReference: {fileID: 1379206037045906916, guid: 8005c71c4d53c804486b500073cfc98a, type: 3}
+      objectReference: {fileID: 449311755147297867, guid: 01d122d7098a81d4fb7ef953dfc46419, type: 3}
     - target: {fileID: 972185431334276803, guid: 1c25d46cff074e84baa49b3bb4125ab6, type: 3}
       propertyPath: 'miniGames.Array.data[3]'
       value: 
