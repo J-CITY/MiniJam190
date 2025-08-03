@@ -34,10 +34,11 @@ public class CoreGameController : MonoBehaviour
 
 
     [SerializeField] private List<GameObject> miniGames = new List<GameObject>();
-    [SerializeField] private TextMeshProUGUI timerText;
+    //[SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private UnityEngine.UI.Slider stressSlider;
     [SerializeField] private GameObject loseNode;
     [SerializeField] private GameObject winNode;
+    [SerializeField] private Clock timer;
 
     private GameObject player;
     private List<GameObject> guys = new List<GameObject>();
@@ -110,7 +111,8 @@ public class CoreGameController : MonoBehaviour
         }
 
         stressSlider.value = stressValue / 100.0f;
-        timerText.text = $"Time Left: {levelTimer:F1}";
+        timer.SetTime(levelTimer);
+        //timerText.text = $"Time Left: {levelTimer:F1}";
         
         if (levelTimer > 0.0f)
         {
@@ -145,7 +147,8 @@ public class CoreGameController : MonoBehaviour
         state = State.Pause;
         Clear();
         stressSlider.gameObject.SetActive(false);
-        timerText.gameObject.SetActive(false);
+        timer.gameObject.SetActive(false);
+        //timerText.gameObject.SetActive(false);
         //player.BroadcastMessage("Pause");
         //foreach (GameObject guy in guys)
         //{
@@ -163,7 +166,8 @@ public class CoreGameController : MonoBehaviour
         SpawnGuys();
 
         stressSlider.gameObject.SetActive(true);
-        timerText.gameObject.SetActive(true);
+        timer.gameObject.SetActive(true);
+        //timerText.gameObject.SetActive(true);
     }
 
     private void CreateMinigame()
@@ -196,6 +200,7 @@ public class CoreGameController : MonoBehaviour
     //Call if WIN in minigame
     void TakeRewardForMinigame()
     {
+        Debug.Log("TakeRewardForMinigame");
         var rnd = UnityEngine.Random.Range(0, itemTrashCount + 1);//itemTrashCount + goal
         itemTrashCount = Math.Max(itemTrashCount-1, 0);
         if (rnd == 0)
