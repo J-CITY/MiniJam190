@@ -11,22 +11,65 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float power = 2f;
     [SerializeField] private float maxGoalSpeed = 4f;
 
+    [SerializeField] private float unsucsessTimer = 2f;
+
+    private float timer = 0;
+
+
     private bool isDragging;
 
     private bool hasCollide = false;
 
+    enum State
+    {
+        Start,
+        Jump,
+        Unsucsess,
+        Sucsess,
+        Win,
+        Lose
+    }
+
+    State state = State.Start;
+
     void Start()
     {
-
+        ResetPos();
+        state = State.Start;
     }
 
     void Update()
     {
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                timer = 0;
+                if (state == State.Unsucsess)
+                {
+                    state = State.Start;
+                    ResetPos();
+                }
+            }
+        }
+
+        // if jamp is end and we didnt collide with guy
+        if (state == State.Jump && isReady())
+        {
+            //ResetPos();
+            GameObject.Find("CoreGame").SendMessage("AddStress", -15);
+            state = State.Unsucsess;
+            timer = unsucsessTimer;
+        }
+        if (state != State.Start)
+        {
+            return;
+        }
         if (!isReady())
         {
             //return;
         }
-        
         Vector2 inputPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float distance = Vector2.Distance(transform.position, inputPos);
 
@@ -42,6 +85,11 @@ public class MovementController : MonoBehaviour
         {
             DragRelease(inputPos);
         }
+    }
+
+    private void ResetPos()
+    {
+        transform.position = GameObject.Find("PlayerSpawnPoint").transform.position;
     }
 
     private bool isReady()
@@ -65,6 +113,7 @@ public class MovementController : MonoBehaviour
 
     private void DragRelease(Vector2 pos)
     {
+        state = State.Jump;
         float distance = Vector2.Distance((Vector2)transform.position, pos);
         isDragging = false;
         line.positionCount = 0;
@@ -86,6 +135,10 @@ public class MovementController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (state != State.Jump)
+        {
+            return;
+        }
         if (collision.gameObject.tag == "Guy")
         {
             Debug.Log("Player collided with guy");
@@ -101,13 +154,14 @@ public class MovementController : MonoBehaviour
 
             if (!isNPC)
             {
+                state = State.Sucsess;
                 // start minigame and clear field
                 GameObject.Find("CoreGame").SendMessage("Pause");
                 GameObject.Find("CoreGame").SendMessage("CreateMinigame");
             }
             else
             {
-                //give damage
+                GameObject.Find("CoreGame").SendMessage("AddStress", -5);
             }
         }
     }

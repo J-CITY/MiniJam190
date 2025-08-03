@@ -91,7 +91,7 @@ public class GuyController : MonoBehaviour
     {
         InitVisual();
         hasDamageForPlayer = Random.Range(0, 11) > trashholdForDamage;
-        loot = (Loot)Random.Range(0, System.Enum.GetNames(typeof(Loot)).Length + 1);
+        loot = (Loot)Random.Range(0, System.Enum.GetNames(typeof(Loot)).Length);
 
         if (GuysCount <= 0)
         {

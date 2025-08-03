@@ -18,7 +18,8 @@ public class CoreGameController : MonoBehaviour
     {
         InGame,
         LevelEnd,
-        Pause
+        Pause,
+        Win
     }
 
     public Transform playerSpawnPoint;
@@ -34,12 +35,19 @@ public class CoreGameController : MonoBehaviour
 
     State state = State.InGame;
 
+    public int stressValue = 100;
+
+    public int lootRestoreStress = 10;
+
 
     List<Loot> loots = new List<Loot>();
+
+    Loot goal = Loot.Loot1;
 
     void Start()
     {
         loots.Clear();
+        goal = (Loot)UnityEngine.Random.Range(0, System.Enum.GetNames(typeof(Loot)).Length);
         state = State.InGame;
         SpawnPlayer();
         SpawnGuys();
@@ -86,10 +94,12 @@ public class CoreGameController : MonoBehaviour
         {
             levelTimer -= Time.deltaTime;
         }
-        if (levelTimer < 0.0f)
+        if (levelTimer < 0.0f || stressValue <= 0)
         {
             levelTimer = 0.0f;
             state = State.LevelEnd;
+
+            stressValue = 0;
             Clear();
         }
     }
@@ -120,6 +130,10 @@ public class CoreGameController : MonoBehaviour
     }
     private void Unpause()
     {
+        if (state != State.Pause)
+        {
+            return;
+        }
         state = State.InGame;
         SpawnPlayer();
         SpawnGuys();
@@ -128,5 +142,33 @@ public class CoreGameController : MonoBehaviour
     private void CreateMinigame()
     {
         Instantiate(miniGames[UnityEngine.Random.Range(0, miniGames.Count)], Vector3.zero, Quaternion.identity);
+    }
+    void AddStress(int v)
+    {
+        if (state != State.InGame)
+        {
+            return;
+        }
+        stressValue += v;
+        if (stressValue < 0)
+        {
+            stressValue = 0;
+        }
+        if (stressValue > 100)
+        {
+            stressValue = 100;
+        }
+    }
+
+    void TakeRewardForMinigame(Loot l)
+    {
+        if (l == goal)
+        {
+            state = State.Win;
+        }
+        else
+        {
+            stressValue += lootRestoreStress;
+        }
     }
 }
