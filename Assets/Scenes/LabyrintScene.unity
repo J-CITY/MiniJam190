@@ -485,6 +485,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5564277458363133857, guid: 420b9b4d616184a469c0b3f7e413d0b9, type: 3}
+      propertyPath: isDebug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564277458363133857, guid: 420b9b4d616184a469c0b3f7e413d0b9, type: 3}
       propertyPath: mainCanvas
       value: 
       objectReference: {fileID: 388525058}

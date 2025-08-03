@@ -8,12 +8,12 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
-    public Canvas mainCanvas;
     public List<GameObject> levels;
 
     public GameObject startButtonPrefab;
     public GameObject winButtonPrefab;
     public GameObject loseButtonPrefab;
+    public bool isDebug = false;
 
     private GameObject currentLevel;
     private PlayerController player;
@@ -61,7 +61,13 @@ public class LevelManager : MonoBehaviour
         Cursor.visible = true;
 
         player.gameEnded = true;
-        ShowButton(winButtonPrefab, RestartLevel, player.transform.position);
+        if (isDebug)
+        {
+            ShowButton(winButtonPrefab, RestartLevel, player.transform.position);
+        } else
+        {
+            DestroyLabyrintGame();
+        }
     }
 
     public void GameOver()
@@ -69,7 +75,14 @@ public class LevelManager : MonoBehaviour
         Cursor.visible = true;
 
         player.gameEnded = true;
-        ShowButton(loseButtonPrefab, RestartLevel, player.transform.position);
+        if (isDebug)
+        {
+            ShowButton(loseButtonPrefab, RestartLevel, player.transform.position);
+        }
+        else
+        {
+            DestroyLabyrintGame();
+        }
     }
 
     void RestartLevel()
@@ -79,14 +92,22 @@ public class LevelManager : MonoBehaviour
         LaunchLevel();
     }
 
+    void DestroyLabyrintGame()
+    {
+        GameObject.Find("CoreGame").SendMessage("Unpause");
+        Destroy(currentButton);
+        Destroy(currentLevel);
+        Destroy(gameObject);
+    }
+
     void ShowButton(GameObject prefab, UnityEngine.Events.UnityAction onClick, Vector3 worldPosition)
     {
         if (currentButton != null)
         {
             Destroy(currentButton);
         }
-
-        currentButton = Instantiate(prefab, mainCanvas.transform);
+        Canvas canvas = FindObjectOfType<Canvas>();
+        currentButton = Instantiate(prefab, canvas.transform);
 
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPosition);
         currentButton.GetComponent<RectTransform>().position = screenPos;
