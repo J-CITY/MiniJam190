@@ -141,6 +141,7 @@ MonoBehaviour:
   power: 2
   maxGoalSpeed: 4
   unsucsessTimer: 2
+  damageSound: {fileID: 8300000, guid: 525891381c03a2a4093a2aebb9b73a71, type: 3}
 --- !u!50 &5680163149449470930
 Rigidbody2D:
   serializedVersion: 5

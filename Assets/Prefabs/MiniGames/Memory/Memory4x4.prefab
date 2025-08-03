@@ -60,7 +60,7 @@ MonoBehaviour:
   - {fileID: 7317684170338965356, guid: 25a62c2f5de124aa7ab467d95e40fa63, type: 3}
   - {fileID: 877217776889192501, guid: a1dacb364ecf64eabac9014631fe6adc, type: 3}
   turnsText: {fileID: 2450885167783007210, guid: 17eb0480b95574339af0a734f85a44ed, type: 3}
-  turnCount: 40
+  turnCount: 20
 --- !u!1 &2638632909872397001
 GameObject:
   m_ObjectHideFlags: 0

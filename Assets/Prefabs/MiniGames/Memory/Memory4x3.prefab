@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40232432652549655, guid: 30b16dc0e9a0545c18b5114b57a31d8f, type: 3}
       propertyPath: turnCount
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1618756080569096994, guid: 30b16dc0e9a0545c18b5114b57a31d8f, type: 3}
       propertyPath: m_Name
