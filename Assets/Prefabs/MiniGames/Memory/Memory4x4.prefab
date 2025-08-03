@@ -58,4 +58,5 @@ MonoBehaviour:
   - {fileID: 5448462374409190486, guid: 8a5f761624486450cada97354e8c6be2, type: 3}
   - {fileID: 7317684170338965356, guid: 25a62c2f5de124aa7ab467d95e40fa63, type: 3}
   - {fileID: 877217776889192501, guid: a1dacb364ecf64eabac9014631fe6adc, type: 3}
+  turnsText: {fileID: 2450885167783007210, guid: 17eb0480b95574339af0a734f85a44ed, type: 3}
   turnCount: 40
