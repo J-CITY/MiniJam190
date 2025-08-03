@@ -495,7 +495,7 @@ PrefabInstance:
     - target: {fileID: 5564277458363133857, guid: 420b9b4d616184a469c0b3f7e413d0b9, type: 3}
       propertyPath: 'levels.Array.data[0]'
       value: 
-      objectReference: {fileID: 3982791241225341286, guid: 01130eee7348d0546a6bf830cefc2e7a, type: 3}
+      objectReference: {fileID: 3982791241225341286, guid: f34d47c25d2879043a12b5e9ad122eca, type: 3}
     - target: {fileID: 8817192105045369016, guid: 420b9b4d616184a469c0b3f7e413d0b9, type: 3}
       propertyPath: m_Name
       value: LabyrintLevelManager
