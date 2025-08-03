@@ -28,7 +28,7 @@ public class QTEMiniGame : MonoBehaviour
     private RectTransform buttonContainer;
     
     [SerializeField]
-    private TextMeshProUGUI timerText;
+    private Clock timer;
 
     private float _currentSpawnCooldown = 0f;
 
@@ -42,6 +42,7 @@ public class QTEMiniGame : MonoBehaviour
     enum State
     {
         Start,
+        WaitForSpawn,
         Idle,
         Spawn,
         Loose,
@@ -61,6 +62,7 @@ public class QTEMiniGame : MonoBehaviour
                 _currentTime = gameTime;
                 UpdateHealthBar();
                 break;
+            case State.WaitForSpawn:
             case State.Idle:
                 break;
             case State.Spawn:
@@ -99,21 +101,25 @@ public class QTEMiniGame : MonoBehaviour
 
     void UpdateTimer()
     {
-        timerText.text = $"Timer: {_currentTime:F1}";
+        timer.SetTime(_currentTime);
     }
 
     private void HandleWinGame()
     {
         OnWin.Invoke();
-        
-        _state = State.Idle;
+        ExitGame();
     }
 
     private void HandleLooseGame()
     {
         OnLoose.Invoke();
-        
-        _state = State.Idle;
+        ExitGame();
+    }
+
+    private void ExitGame()
+    {
+        GameObject.Find("CoreGame").SendMessage("Unpause");
+        Destroy(gameObject);
     }
 
     private void HandleSpawnState()
