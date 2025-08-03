@@ -66,6 +66,8 @@ public class LevelManager : MonoBehaviour
             ShowButton(winButtonPrefab, RestartLevel, player.transform.position);
         } else
         {
+            GameObject.Find("CoreGame").SendMessage("Unpause");
+            GameObject.Find("CoreGame").SendMessage("TakeRewardForMinigame");
             DestroyLabyrintGame();
         }
     }
@@ -81,6 +83,8 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
+            GameObject.Find("CoreGame").SendMessage("Unpause");
+            GameObject.Find("CoreGame").SendMessage("AddStress", -15);
             DestroyLabyrintGame();
         }
     }
@@ -94,7 +98,6 @@ public class LevelManager : MonoBehaviour
 
     void DestroyLabyrintGame()
     {
-        GameObject.Find("CoreGame").SendMessage("Unpause");
         Destroy(currentButton);
         Destroy(currentLevel);
         Destroy(gameObject);
