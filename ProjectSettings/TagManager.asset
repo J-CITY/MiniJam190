@@ -45,6 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BG
+    uniqueID: 1694802441
+    locked: 0
   - name: Player
     uniqueID: 1830390165
     locked: 0
@@ -56,6 +59,7 @@ TagManager:
     locked: 0
   - name: Debug
     uniqueID: 296513677
+    locked: 0
   - name: Labyrint
     uniqueID: 2524129259
     locked: 0
