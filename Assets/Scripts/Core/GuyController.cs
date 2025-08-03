@@ -84,12 +84,18 @@ public class GuyController : MonoBehaviour
             var hair = visual.Find("hair" + i.ToString());
             hair.gameObject.SetActive(i == hairId);
         }
-
+        if (isNPC)
+        {
+            visual.Find("pocket").gameObject.SetActive(false);
+        }
+        else
+        {
+            visual.Find("pocket").gameObject.SetActive(true);
+        }
     }
 
     void Spawn()
     {
-        InitVisual();
         hasDamageForPlayer = Random.Range(0, 11) > trashholdForDamage;
         loot = (Loot)Random.Range(0, System.Enum.GetNames(typeof(Loot)).Length);
 
@@ -101,6 +107,9 @@ public class GuyController : MonoBehaviour
         {
             isNPC = false;
         }
+
+
+        InitVisual();
 
         RemoveLineFromActive();
 

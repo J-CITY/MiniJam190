@@ -36,6 +36,7 @@ public class MovementController : MonoBehaviour
     {
         ResetPos();
         state = State.Start;
+        UpdateVisual();
     }
 
     void Update()
@@ -50,6 +51,7 @@ public class MovementController : MonoBehaviour
                 {
                     state = State.Start;
                     ResetPos();
+                    UpdateVisual();
                 }
             }
         }
@@ -61,6 +63,7 @@ public class MovementController : MonoBehaviour
             GameObject.Find("CoreGame").SendMessage("AddStress", -15);
             state = State.Unsucsess;
             timer = unsucsessTimer;
+            UpdateVisual();
         }
         if (state != State.Start)
         {
@@ -111,6 +114,7 @@ public class MovementController : MonoBehaviour
         line.SetPosition(1, (Vector2)transform.position + Vector2.ClampMagnitude((dir * power) / 2, maxPower / 2));
     }
 
+    private Vector2 saveDir;
     private void DragRelease(Vector2 pos)
     {
         state = State.Jump;
@@ -125,11 +129,44 @@ public class MovementController : MonoBehaviour
 
         Vector2 dir = (Vector2)transform.position - pos;
 
+        saveDir = dir;
+
         body.linearVelocity = Vector2.ClampMagnitude(dir * power, maxPower);
 
         if (!hasCollide)
         {
             // we jumped without collide with guys
+        }
+
+        UpdateVisual();
+       
+    }
+
+    void UpdateVisual()
+    {
+
+        transform.rotation = Quaternion.identity;
+
+        var visual = transform.Find("Visual");
+        if (state == State.Start || state == State.Sucsess || state == State.Win)
+        {
+            visual.Find("defaultCat").gameObject.SetActive(true);
+            visual.Find("jumpCat").gameObject.SetActive(false);
+            visual.Find("sadCat").gameObject.SetActive(false);
+        }
+        else if (state == State.Jump)
+        {
+            visual.Find("defaultCat").gameObject.SetActive(false);
+            visual.Find("jumpCat").gameObject.SetActive(true);
+            visual.Find("sadCat").gameObject.SetActive(false);
+            float angle = Vector2.SignedAngle(Vector2.up, saveDir);
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+        else if (state == State.Lose || state == State.Unsucsess)
+        {
+            visual.Find("defaultCat").gameObject.SetActive(false);
+            visual.Find("jumpCat").gameObject.SetActive(false);
+            visual.Find("sadCat").gameObject.SetActive(true);
         }
     }
 
@@ -155,6 +192,7 @@ public class MovementController : MonoBehaviour
             if (!isNPC)
             {
                 state = State.Sucsess;
+                UpdateVisual();
                 // start minigame and clear field
                 GameObject.Find("CoreGame").SendMessage("Pause");
                 GameObject.Find("CoreGame").SendMessage("CreateMinigame");
