@@ -12,7 +12,7 @@ public class QTEButton : MonoBehaviour
 
     public readonly UnityEvent OnTimerEnd = new();
     public readonly UnityEvent OnClick = new();
-
+    
     public Vector2 Size() => transform.GetComponent<RectTransform>().sizeDelta;
 
     void Update()

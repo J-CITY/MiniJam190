@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using NUnit.Framework.Internal;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class QTEMiniGame : MonoBehaviour
 {
@@ -10,46 +13,127 @@ public class QTEMiniGame : MonoBehaviour
     private float buttonSpawnCooldown = 2f;
 
     [SerializeField]
+    private float gameTime = 10f;
+
+    [SerializeField]
     private int lives;
 
     [SerializeField]
     private QTEButton buttonPrefab;
 
     [SerializeField]
+    private GameObject[] hearts;
+
+    [SerializeField]
     private RectTransform buttonContainer;
+    
+    [SerializeField]
+    private TextMeshProUGUI timerText;
 
     private float _currentSpawnCooldown = 0f;
 
-    private List<QTEButton> _buttons = new List<QTEButton>();
+    private List<QTEButton> _buttons = new();
+
+    public readonly UnityEvent OnLoose = new();
+    public readonly UnityEvent OnWin = new();
+
+    private float _currentTime;
 
     enum State
     {
+        Start,
         Idle,
         Spawn,
+        Loose,
+        Win,
+        SpawnEnd
     }
 
-    private State _state = State.Spawn;
+    private State _state = State.Start;
 
     void Update()
     {
         switch (_state)
         {
+            case State.Start:
+                _state = State.Spawn;
+                _currentSpawnCooldown = buttonSpawnCooldown;
+                _currentTime = gameTime;
+                UpdateHealthBar();
+                break;
             case State.Idle:
                 break;
             case State.Spawn:
                 HandleSpawnState();
                 break;
+            case State.Loose:
+                HandleLooseGame();
+                break;
+            case State.Win:
+                HandleWinGame();
+                break;
+            case State.SpawnEnd:
+                HandleSpawnEndState();
+                break;
         }
+    }
+
+    private void HandleSpawnEndState()
+    {
+        UpdateTimer();
+        if (_buttons.Count > 0)
+        {
+            return;
+        }
+
+        SetWin();
+    }
+
+    void UpdateHealthBar()
+    {
+        for (var i = 0; i < hearts.Length; i++)
+        {
+            hearts[i].SetActive(i < lives);
+        }
+    }
+
+    void UpdateTimer()
+    {
+        timerText.text = $"Timer: {_currentTime:F1}";
+    }
+
+    private void HandleWinGame()
+    {
+        OnWin.Invoke();
+        
+        _state = State.Idle;
+    }
+
+    private void HandleLooseGame()
+    {
+        OnLoose.Invoke();
+        
+        _state = State.Idle;
     }
 
     private void HandleSpawnState()
     {
+        _currentTime -= Time.deltaTime;
+
+        if (_currentTime <= 0)
+        {
+            _state = State.SpawnEnd;
+            _currentTime = 0;
+            return;
+        }
+
         if (_currentSpawnCooldown > 0)
         {
             _currentSpawnCooldown -= Time.deltaTime;
             return;
         }
 
+        UpdateTimer();
         SpawnButton();
         _currentSpawnCooldown = buttonSpawnCooldown;
     }
@@ -107,12 +191,19 @@ public class QTEMiniGame : MonoBehaviour
         lives--;
         if (lives <= 0)
         {
-            EndGame();
+            SetLoose();
         }
+
+        UpdateHealthBar();
     }
 
-    private void EndGame()
+    private void SetLoose()
     {
-        
+        _state = State.Loose;
+    }
+
+    private void SetWin()
+    {
+        _state = State.Win;
     }
 }
