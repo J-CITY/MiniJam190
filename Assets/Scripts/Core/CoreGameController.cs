@@ -178,11 +178,6 @@ public class CoreGameController : MonoBehaviour
     //Call if LOSE in minigame with v = -15
     void AddStress(int v)
     {
-        if (state != State.InGame)
-        {
-            return;
-        }
-
         Debug.Log("AddStress");
         Debug.Log(v);
         stressValue += v;
