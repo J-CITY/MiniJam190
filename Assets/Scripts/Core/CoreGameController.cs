@@ -130,6 +130,8 @@ public class CoreGameController : MonoBehaviour
         }
         state = State.Pause;
         Clear();
+        stressText.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(false);
         //player.BroadcastMessage("Pause");
         //foreach (GameObject guy in guys)
         //{
@@ -145,6 +147,9 @@ public class CoreGameController : MonoBehaviour
         state = State.InGame;
         SpawnPlayer();
         SpawnGuys();
+
+        stressText.gameObject.SetActive(true);
+        timerText.gameObject.SetActive(true);
     }
 
     private void CreateMinigame()
