@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 
 public class MemoryMiniGame : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class MemoryMiniGame : MonoBehaviour
     private float unflipDelay;
     [SerializeField]
     private List<GameObject> cardPrefabs;
+    [SerializeField]
+    private GameObject turnsText;
+
+    private GameObject turnsTextInstance;
 
     [SerializeField] 
     private int turnCount;
@@ -68,6 +73,8 @@ public class MemoryMiniGame : MonoBehaviour
         Debug.Log(size);
         
         transform.position = new Vector3((size.x - offsetX - spriteSize.x) * -0.5f, (size.y - offsetY - spriteSize.y) * -0.5f, 0);
+        
+        SpawnUI();
     }
 
     void Update()
@@ -75,6 +82,7 @@ public class MemoryMiniGame : MonoBehaviour
         if (turnCount == 0 || _matchedCards.Count == columns * rows)
         {
             GameObject.Find("CoreGame").SendMessage("Unpause");
+            DespawnUI();
             Destroy(gameObject);
         }
         
@@ -110,7 +118,24 @@ public class MemoryMiniGame : MonoBehaviour
             }
 
             _flippedCards.RemoveRange(0, 2);
+            
+            turnsTextInstance.GetComponent<TextMeshProUGUI>().text = $"Turns: {turnCount}";
         }
+    }
+
+    void SpawnUI()
+    {
+        var UI = GameObject.Find("UI");
+        
+        turnsTextInstance = Instantiate(turnsText, UI.transform);
+        
+       turnsTextInstance.GetComponent<TextMeshProUGUI>().text = $"Turns: {turnCount}";
+    }
+
+
+    void DespawnUI()
+    {
+        Destroy(turnsTextInstance);
     }
     
     void Shuffle<T>(List<T> list)
