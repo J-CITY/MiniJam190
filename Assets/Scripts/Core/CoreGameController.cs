@@ -101,6 +101,8 @@ public class CoreGameController : MonoBehaviour
 
             stressValue = 0;
             Clear();
+
+            LoseGame();
         }
     }
 
@@ -165,10 +167,21 @@ public class CoreGameController : MonoBehaviour
         if (l == goal)
         {
             state = State.Win;
+            WinGame();
         }
         else
         {
             stressValue += lootRestoreStress;
         }
+    }
+
+    void LoseGame()
+    {
+
+    }
+
+    void WinGame()
+    {
+
     }
 }
