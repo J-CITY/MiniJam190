@@ -4,6 +4,7 @@ using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 
@@ -31,7 +32,7 @@ public class CoreGameController : MonoBehaviour
     [SerializeField] private float levelTimer = 60.0f;
     [SerializeField] private List<GameObject> miniGames = new List<GameObject>();
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private TextMeshProUGUI stressText;
+    [SerializeField] private UnityEngine.UI.Slider stressSlider;
 
     private GameObject player;
     private List<GameObject> guys = new List<GameObject>();
@@ -94,8 +95,8 @@ public class CoreGameController : MonoBehaviour
         {
             return;
         }
-        
-        stressText.text = $"Stress: {stressValue}";
+
+        stressSlider.value = stressValue / 100.0f;
         timerText.text = $"Time Left: {levelTimer:F1}";
         
         if (levelTimer > 0.0f)
@@ -132,7 +133,7 @@ public class CoreGameController : MonoBehaviour
         }
         state = State.Pause;
         Clear();
-        stressText.gameObject.SetActive(false);
+        stressSlider.gameObject.SetActive(false);
         timerText.gameObject.SetActive(false);
         //player.BroadcastMessage("Pause");
         //foreach (GameObject guy in guys)
@@ -150,7 +151,7 @@ public class CoreGameController : MonoBehaviour
         SpawnPlayer();
         SpawnGuys();
 
-        stressText.gameObject.SetActive(true);
+        stressSlider.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
     }
 
