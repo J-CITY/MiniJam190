@@ -127,6 +127,6 @@ public class CoreGameController : MonoBehaviour
 
     private void CreateMinigame()
     {
-        Instantiate(miniGames[0], transform);
+        Instantiate(miniGames[UnityEngine.Random.Range(0, miniGames.Count)], Vector3.zero, Quaternion.identity);
     }
 }

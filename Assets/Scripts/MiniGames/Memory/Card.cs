@@ -13,14 +13,11 @@ public class Card : MonoBehaviour
     [SerializeField]
     private float upscaleValue;
 
-    [SerializeField]
-    private Sprite backSprite;
-    [SerializeField]
-    private Sprite frontSprite;
+    public Sprite backSprite;
+    public Sprite frontSprite;
     private Action<Card> _clickCallback;
     private bool _isFlipping = false;
     private SpriteRenderer _spriteRenderer;
-    private DG.Tweening.Sequence _sequence;
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -49,23 +46,17 @@ public class Card : MonoBehaviour
     {
         _isFlipping = true;
         
-        _sequence = DOTween.Sequence();
+        var seq = DOTween.Sequence();
 
-        _sequence.Append(transform.DOScale(transform.localScale + transform.localScale * upscaleValue, scaleDuration));
-        _sequence.Join(transform.DORotate(new Vector3(0, 90, 0), rotateDuration, RotateMode.LocalAxisAdd));
+        seq.Append(transform.DOScale(transform.localScale + transform.localScale * upscaleValue, scaleDuration));
+        seq.Join(transform.DORotate(new Vector3(0, 90, 0), rotateDuration, RotateMode.LocalAxisAdd));
 
-        _sequence.AppendCallback(() => _spriteRenderer.sprite = _spriteRenderer.sprite == backSprite ? frontSprite : backSprite);
-        _sequence.Append(transform.DOScale(transform.localScale, scaleDuration));
-        _sequence.Join(transform.DORotate(new Vector3(0, 90, 0), rotateDuration, RotateMode.LocalAxisAdd));
-        _sequence.AppendCallback(() => _isFlipping = false);
+        seq.AppendCallback(() => _spriteRenderer.sprite = _spriteRenderer.sprite == backSprite ? frontSprite : backSprite);
+        seq.Append(transform.DOScale(transform.localScale, scaleDuration));
+        seq.Join(transform.DORotate(new Vector3(0, 90, 0), rotateDuration, RotateMode.LocalAxisAdd));
+        seq.AppendCallback(() => _isFlipping = false);
 
-        return _sequence;
-    }
-
-    [CanBeNull]
-    public Tween GetCurrentTween()
-    {
-        return _sequence;
+        return seq;
     }
 
     public bool IsFlipping()
