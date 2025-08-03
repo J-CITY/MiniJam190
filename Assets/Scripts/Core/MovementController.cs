@@ -15,6 +15,8 @@ public class MovementController : MonoBehaviour
 
     private float timer = 0;
 
+    public AudioClip damageSound;
+
 
     private bool isDragging;
 
@@ -63,6 +65,7 @@ public class MovementController : MonoBehaviour
             GameObject.Find("CoreGame").SendMessage("AddStress", -15);
             state = State.Unsucsess;
             timer = unsucsessTimer;
+            AudioSource.PlayClipAtPoint(damageSound, transform.position);
             UpdateVisual();
         }
         if (state != State.Start)
