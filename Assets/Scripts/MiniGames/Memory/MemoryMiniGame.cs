@@ -45,7 +45,7 @@ public class MemoryMiniGame : MonoBehaviour
         {
             for (var column = 0; column < columns; ++column)
             {
-                var gameObject = Instantiate(cards[row * columns + column], new Vector3((offsetX + spriteSize.x) * row, (offsetY + spriteSize.y) * column, 0), Quaternion.identity, this.transform);
+                var gameObject = Instantiate(cards[row * columns + column], new Vector3((offsetX + spriteSize.x) * column, (offsetY + spriteSize.y) * row, 0), Quaternion.identity, transform);
 
                 var card = gameObject.GetComponent<Card>();
                 
