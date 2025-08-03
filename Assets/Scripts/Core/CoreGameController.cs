@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor;
 using UnityEngine;
@@ -29,6 +30,8 @@ public class CoreGameController : MonoBehaviour
     [SerializeField] private int maxGuyOnField = 10;
     [SerializeField] private float levelTimer = 60.0f;
     [SerializeField] private List<GameObject> miniGames = new List<GameObject>();
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI stressText;
 
     private GameObject player;
     private List<GameObject> guys = new List<GameObject>();
@@ -89,7 +92,10 @@ public class CoreGameController : MonoBehaviour
         {
             return;
         }
-        Debug.Log(levelTimer);
+        
+        stressText.text = $"Stress: {stressValue}";
+        timerText.text = $"Time Left: {levelTimer:F1}";
+        
         if (levelTimer > 0.0f)
         {
             levelTimer -= Time.deltaTime;

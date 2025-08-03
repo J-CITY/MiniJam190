@@ -69,9 +69,6 @@ public class MemoryMiniGame : MonoBehaviour
 
         var size = new Vector2(columns * (spriteSize.x + offsetX), rows * (spriteSize.y + offsetY));
         
-        Debug.Log(spriteSize);
-        Debug.Log(size);
-        
         transform.position = new Vector3((size.x - offsetX - spriteSize.x) * -0.5f, (size.y - offsetY - spriteSize.y) * -0.5f, 0);
         
         SpawnUI();
