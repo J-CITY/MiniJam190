@@ -126,6 +126,8 @@ public class QTEMiniGame : MonoBehaviour
             _currentTime = 0;
             return;
         }
+        
+        UpdateTimer();
 
         if (_currentSpawnCooldown > 0)
         {
@@ -133,7 +135,6 @@ public class QTEMiniGame : MonoBehaviour
             return;
         }
 
-        UpdateTimer();
         SpawnButton();
         _currentSpawnCooldown = buttonSpawnCooldown;
     }
